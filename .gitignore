@@ -2,3 +2,6 @@
 build
 *.egg-info
 __pycache__
+learn-ai-bbc
+/src/data_edit.py
+/data/BBC News ALL Removed.csv
