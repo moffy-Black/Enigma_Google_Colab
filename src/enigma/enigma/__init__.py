@@ -48,8 +48,6 @@ class Enigma:
         for _ in range(rotor):
             new_alphabet.insert(0, new_alphabet[-1])
             new_alphabet.pop(-1)
-        print(self.alphabet)
-        print(new_alphabet)
         return new_alphabet
 
     def inverse_permutate(self, rotor):
@@ -59,8 +57,6 @@ class Enigma:
         for _ in range(rotor):
             new_alphabet.append(new_alphabet[0])
             new_alphabet.pop(0)
-        print(self.alphabet)
-        print(new_alphabet)
         return new_alphabet
 
     def encrypt_text(self, text):
@@ -82,23 +78,18 @@ class Enigma:
                 reverse_settings_dict = {"gama":self.gama,"beta":self.beta,"alpha":self.alpha}
                 for key in settings_dict:
                     temp_letter = self.permutate(settings_dict[key])[self.alphabet.index(temp_letter)]
-                    print("{} - {}".format(key,temp_letter))
                 temp_letter = self.reflector[self.alphabet.index(temp_letter)]
-                print("reflector - > {}".format(temp_letter))
                 for key in reverse_settings_dict:
                     temp_letter = self.inverse_permutate(settings_dict[key])[self.alphabet.index(temp_letter)]
-                    print("{} - {}".format(key,temp_letter))
                 encrypted_text.append(temp_letter)
-                print(temp_letter)
 
                 self.alpha += 1
                 if self.alpha % len(self.alphabet) == 0:
                     self.beta += 1
                     self.alpha = 0
-                if self.beta % len(self.alphabet) == 0 and self.alphabet % len(self.alphabet) != 0 and self.beta >= len(self.alphabet) -1:
+                if self.beta % len(self.alphabet) == 0 and self.alpha % len(self.alphabet) != 0 and self.beta >= len(self.alphabet) -1:
                     self.gama += 1
                     self.beta = 1
-                print('alpha - {}'.format(self.alpha))
         return ''.join(encrypted_text)
 
     def encrypt_txt(self, original_path, encrypted_path = None):
